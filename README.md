@@ -10,8 +10,10 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 
 1. **Clone o repositório**  
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/elppans/ubuntu2204-package-list.git
+   ```
+   ```bash
+   cd ubuntu2204-package-list
    ```
 
 2. **Edite o script conforme necessário**  
