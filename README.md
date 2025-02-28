@@ -1,0 +1,1 @@
+# ubuntu2204_pac_install.sh
