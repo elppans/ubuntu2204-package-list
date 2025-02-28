@@ -131,8 +131,9 @@ cd -
 # ./wbvsshclient_arch-inst.sh
 
 # Modelos de arquivos
-curl -JLk -o /tmp/Modelos.tar.gz "https://www.dropbox.com/scl/fi/7eegadghb5v9o71qv0s28/Modelos.tar.gz?rlkey=xkhl1qn7usd61guxe7kbm59zt&st=d02i3dhi&dl=0"
-tar -zxf /tmp/Modelos.tar.gz -C "$HOME/Modelos"
+git clone https://github.com/elppans/ubuntu_file_templates.git /tmp/ubuntu_file_templates
+cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
+rm -rf /tmp/ubuntu_file_templates
 
 # Atualização do sistema
 
