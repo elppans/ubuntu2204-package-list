@@ -130,6 +130,11 @@ cd -
 # chmod +x wbvsshclient_arch-inst.sh && \
 # ./wbvsshclient_arch-inst.sh
 
+# Compilador de codigo fonte baseado no makepkg (Archlinux), makedeb - AVANÇADO
+# cd /tmp
+# export MAKEDEB_RELEASE='makedeb-alpha'
+# bash -c "$(wget -qO - 'https://shlink.makedeb.org/install')"
+
 # Modelos de arquivos
 git clone https://github.com/elppans/ubuntu_file_templates.git /tmp/ubuntu_file_templates
 cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
