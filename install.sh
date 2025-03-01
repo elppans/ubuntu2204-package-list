@@ -126,6 +126,60 @@ install_snap shfmt
 install_snap prettier
 install_snap dbeaver-ce
 
+# Editor de desenvolvimento
+clear
+echo "========================="
+echo "Editor de desenvolvimento"
+echo "========================="
+echo ""
+echo "O Visual Studio Code (VSCode) é a versão oficial da Microsoft, enquanto o VSCodium é uma versão 'liberada' do VSCode sem os componentes de telemetria da Microsoft."
+echo "Veja mais em: https://github.com/elppans/vscodeum"
+echo ""
+echo "1) Code = VSCode, editor de desenvolvimento"
+echo "2) Codium = VSCodium, Editor de desenvolvimento VSCode versão livre"
+echo ""
+echo "Se não escolher nenhum e apertar ENTER, nada será instalado."
+echo ""
+echo -n "Escolha qual quer usar (1 ou 2) e aperte ENTER: "
+
+read choice
+
+case $choice in
+    1)
+        echo "Instalando VSCode..."
+        install_snap code
+        export VSCODE="1"
+        ;;
+    2)
+        echo "Instalando VSCodium..."
+        install_snap codium
+        export VSCODIUM="1"
+        ;;
+    *)
+        echo "Nenhum editor será instalado."
+        ;;
+esac
+
+# Configuração do VSCode
+if [ "$VSCODE" -eq 1 ]; then
+    echo "VSCode selecionado! Executando configuração..."
+	cd
+ 	mkdir -p "$HOME/.config/Code/User"
+	# Removido o Download do pacote de backup do VSCode
+	# tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME/.config/Code/User/
+	#cat "$HOME/.config/Code/User/extensions_list.txt | xargs -L 1 codium --install-extension
+fi
+
+# Configuração do VSCodium
+if [ "$VSCODIUM" -eq 1 ]; then
+    echo "VSCodium selecionado! Executando configuração..."
+	cd
+ 	mkdir -p "$HOME/.config/VSCodium/User"
+	# Removido o Download do pacote de backup do VSCodium
+	# tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
+	#cat "$HOME"/.config/VSCodium/User/extensions_list.txt | xargs -L 1 codium --install-extension
+fi
+
 # ___ Instalação de pacotes via FLATPAK
 
 sudo flatpak install -y flathub com.google.Chrome
