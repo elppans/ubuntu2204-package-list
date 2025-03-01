@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# ___ Configurações do sistema
+
+# Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
+dconf write /org/gnome/nautilus/preferences/show-create-link true
+dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
+
+# Configurar a opção "Notificar-me de uma nova versão do Ubuntu" como "Nunca"
+sudo sed -i 's/^Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades
+
+# Desativar a verificação de atualizações de segurança do Ubuntu Pro
+sudo sed -i 's/^/#/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/*esm*.sources
+
+# Comenta a linha que faz referência ao CD-ROM no arquivo de fontes de pacotes
+sudo sed -i.bak '/^deb cdrom:/s/^/#/' /etc/apt/sources.list
+
+# Atualização da lista de repositórios
+sudo apt update
+
 # ___ Instalação do Flatpak
 
 # Infraestrutura de distribuição de aplicações para apps de desktop Flatpak
@@ -12,8 +30,6 @@ sudo apt -y install gnome-software-plugin-flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # ___ Instalação de pacotes via APT
-
-sudo apt update
 
 # Remoção de jogos inúteis
 sudo apt -y remove gnome-sudoku gnome-mahjongg gnome-mines aisleriot
