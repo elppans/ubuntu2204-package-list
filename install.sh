@@ -174,10 +174,10 @@ fi
 if [ "$VSCODIUM" -eq 1 ]; then
     echo "VSCodium selecionado! Executando configuração..."
 	cd
- 	mkdir -p "$HOME/.config/VSCodium/User"
-	# Removido o Download do pacote de backup do VSCodium
-	# tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
-	#cat "$HOME"/.config/VSCodium/User/extensions_list.txt | xargs -L 1 codium --install-extension
+	mkdir -p "$HOME/.config/VSCodium/User"
+	curl -JLk -o /tmp/vscodium_backup.tar.gz "https://github.com/elppans/vscodeum/raw/refs/heads/main/vscodium_backup/vscodium_backup_20250226_170128.tar.gz"
+	tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
+	cat "$HOME"/.config/VSCodium/User/extensions_list.txt | xargs -L 1 codium --install-extension
 fi
 
 # ___ Instalação de pacotes via FLATPAK
