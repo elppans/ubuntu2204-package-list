@@ -2,6 +2,9 @@
 
 # ___ Configurações do sistema
 
+# Atualiza a lista de pacotes em modo silencioso
+sudo apt update -qq
+
 # Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
 dconf write /org/gnome/nautilus/preferences/show-create-link true
 dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
@@ -10,6 +13,7 @@ dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
 sudo sed -i 's/^Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades
 
 # Desativar a verificação de atualizações de segurança do Ubuntu Pro
+# Comenta as linhas do arquivo após ele ter sido criado e preenchido pelo apt update
 sudo sed -i 's/^/#/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/*esm*.sources
 
 # Comenta a linha que faz referência ao CD-ROM no arquivo de fontes de pacotes
