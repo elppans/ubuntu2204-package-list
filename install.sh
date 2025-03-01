@@ -2,6 +2,8 @@
 
 # ___ Configurações do sistema
 
+echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplicamos as atualizações e ajustes necessários..."
+
 # Atualiza a lista de pacotes em modo silencioso
 sudo apt update -qq
 
@@ -21,6 +23,11 @@ sudo sed -i.bak '/^deb cdrom:/s/^/#/' /etc/apt/sources.list
 
 # Atualização da lista de repositórios
 sudo apt update
+
+# ___ Instalação de aplicativos
+
+echo "Instalação dos aplicativos em andamento. Por favor, aguarde enquanto concluímos a configuração do sistema..."
+sleep 3
 
 # ___ Instalação do Flatpak
 
