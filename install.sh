@@ -69,8 +69,8 @@ sudo mkdir -p /usr/share/nautilus-python/extensions
 sudo curl -JLk -o /usr/share/nautilus-python/extensions/DiskUsageLocationWidget.py "https://raw.githubusercontent.com/elppans/Nautilus-Status-Bar-Replacement/refs/heads/master/DiskUsageLocationWidget.py"
 
 # Actions for Nautilus
-mkdir -p ~/build
-cd ~/build
+# mkdir -p ~/build
+cd /tmp
 sudo apt -y install python3-nautilus python3-gi procps libjs-jquery baobab meld xclip zenity
 
 git clone https://github.com/elppans/actions-for-nautilus.git
