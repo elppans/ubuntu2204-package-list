@@ -1,4 +1,4 @@
-# 🛠️ Script de Instalação para Ubuntu 22.04  
+# 🛠️ Script de PÓS Instalação para Ubuntu 22.04  
 
 Este script automatiza a instalação de pacotes essenciais no **Ubuntu 22.04**, utilizando `apt`, `snap` e `flatpak`, além de configurar alguns scripts customizados.  
 
