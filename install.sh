@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2002,SC2103,SC2164,SC2162,SC2181
+# shellcheck disable=SC1091,SC2002,SC2103,SC2164,SC2162,SC2181
 
 # ___ Configurações do sistema
 
@@ -80,6 +80,40 @@ sudo make install_global
 mkdir -p "$HOME"/.local/share/actions-for-nautilus
 cp /usr/share/actions-for-nautilus-configurator/sample-config.json "$HOME"/.local/share/actions-for-nautilus/config.json
 nautilus -q
+
+# https://www.teamviewer.com/pt-br/download/linux/
+sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb
+
+# GNU privacy guard - serviço de gerenciamento de certificados de rede
+sudo apt -y install dirmngr
+sudo mkdir -m 700 -p /root/.gnupg
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
+
+# OpenFortiGUI App
+# https://hadler.me/linux/openfortigui/ https://apt.iteas.at/
+source /etc/lsb-release
+# sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 23CAE45582EB0928
+gpg -k && sudo -S gpg --no-default-keyring --keyring /usr/share/keyrings/iteas-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 23CAE45582EB0928
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/iteas-keyring.gpg] https://apt.iteas.at/iteas ""$DISTRIB_CODENAME"" main" | sudo tee /etc/apt/sources.list.d/iteas.list >> /dev/null
+sudo apt -qq update
+sudo apt -y install openfortigui
+
+# Download Cisco Secure Client, Version 5.1.6.103
+# Site: https://ftp.uni-weimar.de/
+# Cisco Secure Client für Linux 64bit (RPM installer)
+# https://ftp.uni-weimar.de/cisco-secure-client-linux64-5.1.6.103-predeploy-k9.tar.gz
+# Cisco Secure Client für Linux 64bit (DEB installer)
+# https://ftp.uni-weimar.de/cisco-secure-client-linux64-5.1.6.103-predeploy-deb-k9.tar.gz
+# Alternativa (https://helpdesk.ugent.be/vpn/, https://www.aim.aoyama.ac.jp/network/vpn/)
+# https://www.aim.aoyama.ac.jp/files/vpn/cisco-secure-client-linux64-5.1.6.103-predeploy-k9.tar.gz
+curl -JLk -o /tmp/cisco-secure-client-linux64.tr.gz "https://ftp.uni-weimar.de/cisco-secure-client-linux64-5.1.6.103-predeploy-deb-k9.tar.gz"
+sudo tar -zxf /tmp/cisco-secure-client-linux64.tr.gz -C /var/cache/apt/archives/
+sudo rm -rf /var/cache/apt/archives/CiscoSystemsInc.pgp
+sudo apt install /var/cache/apt/archives/cisco-secure-client-vpn_5.1.6.103_amd64.deb 
+sudo systemctl enable --now vpnagentd
+# systemctl status vpnagentd
 
 # ___ Instalação de pacotes via SNAP
 
