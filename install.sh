@@ -52,6 +52,9 @@ sudo apt -y install openssh-server
 sudo apt -y install apt-file curl git make
 sudo apt-file update
 
+# processador JSON de linha de comando, leve e flexível
+sudo apt -y install jq
+
 # Pacotes para aplicativos Windows
 sudo apt -y install wine winetricks
 
@@ -68,7 +71,7 @@ sudo curl -JLk -o /usr/share/nautilus-python/extensions/DiskUsageLocationWidget.
 # Actions for Nautilus
 mkdir -p ~/build
 cd ~/build
-sudo apt -y install python3-nautilus python3-gi procps libjs-jquery baobab xclip zenity
+sudo apt -y install python3-nautilus python3-gi procps libjs-jquery baobab meld xclip zenity
 
 git clone https://github.com/elppans/actions-for-nautilus.git
 cd actions-for-nautilus
