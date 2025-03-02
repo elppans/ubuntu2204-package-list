@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2002,SC2103,SC2164,SC2162,SC2181
 
 # ___ Configurações do sistema
 
@@ -76,8 +77,8 @@ sudo apt -y install python3-nautilus python3-gi procps libjs-jquery baobab meld 
 git clone https://github.com/elppans/actions-for-nautilus.git
 cd actions-for-nautilus
 sudo make install_global
-mkdir -p $HOME/.local/share/actions-for-nautilus
-cp /usr/share/actions-for-nautilus-configurator/sample-config.json $HOME/.local/share/actions-for-nautilus/config.json
+mkdir -p "$HOME"/.local/share/actions-for-nautilus
+cp /usr/share/actions-for-nautilus-configurator/sample-config.json "$HOME"/.local/share/actions-for-nautilus/config.json
 nautilus -q
 
 # ___ Instalação de pacotes via SNAP
@@ -137,38 +138,12 @@ install_snap prettier
 install_snap dbeaver-ce
 
 # Editor de desenvolvimento
-clear
-echo "========================="
-echo "Editor de desenvolvimento"
-echo "========================="
-echo ""
-echo "O Visual Studio Code (VSCode) é a versão oficial da Microsoft, enquanto o VSCodium é uma versão 'liberada' do VSCode sem os componentes de telemetria da Microsoft."
-echo "Veja mais em: https://github.com/elppans/vscodeum"
-echo ""
-echo "1) Code = VSCode, editor de desenvolvimento"
-echo "2) Codium = VSCodium, Editor de desenvolvimento VSCode versão livre"
-echo ""
-echo "Se não escolher nenhum e apertar ENTER, nada será instalado."
-echo ""
-echo -n "Escolha qual quer usar (1 ou 2) e aperte ENTER: "
+# O Visual Studio Code (VSCode) é a versão oficial da Microsoft,
+# O VSCodium é uma versão 'liberada' do VSCode sem os componentes de telemetria da Microsoft.
+# Veja mais em: https://github.com/elppans/vscodeum
 
-read choice
-
-case $choice in
-    1)
-        echo "Instalando VSCode..."
-        install_snap code
-        export VSCODE="1"
-        ;;
-    2)
-        echo "Instalando VSCodium..."
-        install_snap codium
-        export VSCODIUM="1"
-        ;;
-    *)
-        echo "Nenhum editor será instalado."
-        ;;
-esac
+# install_snap code && export VSCODE="1" # "Instalando VSCode..."
+install_snap codium && export VSCODIUM="1" # "Instalando VSCodium..."
 
 # Configuração do VSCode
 if [ "$VSCODE" -eq 1 ]; then
