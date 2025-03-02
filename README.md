@@ -38,7 +38,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 ✔ **Execução de scripts customizados**  
 ✔ **Atualização e limpeza do sistema**  
 
-## Lista de Aplicativos
+## 📜 Lista de Aplicativos
 
 #### Instalação do Flatpak
 - Flatpak
@@ -68,7 +68,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 - zenity (Ferramenta para criar diálogos gráficos)
 
 #### Instalação via SNAP
-- marktext (Editor de texto)
+- marktext (Editor de texto Markdown)
 - vivaldi (Navegador web)
 - opera (Navegador web)
 - gtkhash (Ferramenta de hash)
