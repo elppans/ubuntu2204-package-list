@@ -149,7 +149,7 @@ install_snap codium && export VSCODIUM="1" # "Instalando VSCodium..."
 if [ "$VSCODE" -eq 1 ]; then
     echo "VSCode selecionado! Executando configuração..."
 	cd
- 	mkdir -p "$HOME/.config/Code/User"
+    mkdir -p "$HOME/.config/Code/User"
 	# Removido o Download do pacote de backup do VSCode
 	# tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME/.config/Code/User/
 	#cat "$HOME/.config/Code/User/extensions_list.txt | xargs -L 1 codium --install-extension
