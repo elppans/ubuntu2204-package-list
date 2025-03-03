@@ -69,7 +69,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 - dirmngr (GPG - serviço de gerenciamento de certificados de rede)
 - openfortigui (GUI para openfortivpn)
 - stylelint (Poderoso e moderno linter CSS)
-- teamviewer_amd64 (Solução de controle remoto e reunião.)
+- teamviewer_amd64 (Software de acesso remoto Team Viewer)
 - cisco-secure-client-vpn (Módulo AnyConnect VPN para o Cisco Secure Client)
 
 #### Instalação via SNAP
