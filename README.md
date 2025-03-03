@@ -17,7 +17,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
    ```
 
 2. **Edite o script conforme necessário**  
-   - O script instala vários pacotes por padrão.  
+   - O script `install.sh` instala vários pacotes por padrão.  
    - **Comente (`#`) ou descomente** as linhas dos pacotes que deseja instalar.  
 
 3. **Torne o script executável**  
