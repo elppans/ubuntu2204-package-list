@@ -81,6 +81,10 @@ mkdir -p "$HOME"/.local/share/actions-for-nautilus
 cp /usr/share/actions-for-nautilus-configurator/sample-config.json "$HOME"/.local/share/actions-for-nautilus/config.json
 nautilus -q
 
+# Stylelint
+sudo curl -JLk -o /var/cache/apt/archives/stylelint.deb "https://github.com/elppans/stylelint_makedeb/raw/refs/heads/main/deb/stylelint_16.10.0-1_amd64.deb"
+sudo apt -y install /var/cache/apt/archives/stylelint.deb
+
 # https://www.teamviewer.com/pt-br/download/linux/
 sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb

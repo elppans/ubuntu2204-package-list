@@ -66,6 +66,11 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 - meld (Ferramenta de comparação de arquivos e diretórios)
 - xclip (Ferramenta de linha de comando para o clipboard)
 - zenity (Ferramenta para criar diálogos gráficos)
+- dirmngr (GPG - serviço de gerenciamento de certificados de rede)
+- openfortigui (GUI para openfortivpn)
+- stylelint (Poderoso e moderno linter CSS)
+- teamviewer_amd64 (Solução de controle remoto e reunião.)
+- cisco-secure-client-vpn (Módulo AnyConnect VPN para o Cisco Secure Client)
 
 #### Instalação via SNAP
 - marktext (Editor de texto Markdown)
