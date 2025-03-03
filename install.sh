@@ -89,6 +89,12 @@ nautilus -q
 # Stylelint
 sudo curl -JLk -o /var/cache/apt/archives/stylelint.deb "https://github.com/elppans/stylelint_makedeb/raw/refs/heads/main/deb/stylelint_16.10.0-1_amd64.deb"
 sudo apt -y install /var/cache/apt/archives/stylelint.deb
+echo -e '#!/usr/bin/env bash
+
+PATH=/snap/bin:$PATH
+/usr/bin/stylelint "$@"
+' | sudo tee /usr/local/bin/stylelint &>>/dev/null
+sudo chmod +x /usr/local/bin/stylelint
 
 # https://www.teamviewer.com/pt-br/download/linux/
 sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
@@ -175,6 +181,7 @@ install_snap marktext
 install_snap vivaldi
 install_snap opera
 install_snap gtkhash
+install_snap node
 install_snap shellcheck
 install_snap shfmt
 install_snap prettier
