@@ -1,8 +1,13 @@
 #!/bin/bash
 # shellcheck disable=SC1091,SC2002,SC2103,SC2164,SC2162,SC2181
 
-# ___ Configurações do sistema
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Erro: Este script não deve ser executado como root ou sudo."
+    exit 1
+fi
 
+# ___ Configurações do sistema
+sudo echo
 echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplicamos as atualizações e ajustes necessários..."
 
 # Atualiza a lista de pacotes em modo silencioso
