@@ -94,7 +94,10 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 #### Instalação via Scripts Customizados
 - Action Script (Conversão de imagens)
 - Modelos de arquivos
-
+- Bitvise {Aplicativo Wine}-(Transferência de arquivos, terminal e tunelamento).  
+Descomente as linhas se quiser instalar 
+- Makedeb (Compilador de codigo fonte baseado no makepkg (Archlinux) - AVANÇADO).  
+Descomente as linhas se quiser instalar 
 
 ## 🚨 Aviso Legal  
 
