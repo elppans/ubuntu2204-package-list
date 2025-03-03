@@ -130,6 +130,9 @@ sudo apt install /var/cache/apt/archives/cisco-secure-client-vpn_5.1.6.103_amd64
 sudo systemctl enable --now vpnagentd
 # systemctl status vpnagentd
 
+# Utilitários X11
+sudo apt -y install x11-utils
+
 # ___ Instalação de pacotes via SNAP
 
 # Função para instalar pacotes via snap
@@ -248,6 +251,43 @@ cd -
 git clone https://github.com/elppans/ubuntu_file_templates.git /tmp/ubuntu_file_templates
 cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
 rm -rf /tmp/ubuntu_file_templates
+
+# ___ Extenções Gnome
+
+# Extenção Unite v72 para Ubuntu 22.04, Gnome 42.9
+# Unite faz o GNOME Shell parecer com o Ubuntu Unity Shell
+# https://github.com/hardpixel/unite-shell
+# https://extensions.gnome.org/extension/1287/unite/
+# https://aur.archlinux.org/packages/gnome-shell-extension-unite
+# Exportar a configuração da extenção
+# dconf dump /org/gnome/shell/extensions/unite/ > unite-extensions-settings.conf
+# Importar a configuração da extenção em outro sistema
+# dconf load /org/gnome/shell/extensions/unite/ < unite-settings.conf
+
+# Dependência: x11-utils
+
+# Download da extenção
+wget -P /tmp -c https://github.com/hardpixel/unite-shell/releases/download/v72/unite-shell-v72.zip
+
+# Instalação para um usuário
+mkdir -p "$HOME/.local/share/gnome-shell/extensions"
+unzip -o /tmp/unite-shell-v72.zip -d "$HOME/.local/share/gnome-shell/extensions"
+
+# Instalação no sistema, para todos os usuários
+# unzip -o /tmp/unite-shell-v72.zip -d /usr/share/gnome-shell/extensions
+
+# Ativação da extenção, sem deslogar e logar (para um usuário)
+# Se a extenção não for ativada e aparecer na lista, deve deslogar e logar
+gnome-extensions install "$HOME/.local/share/gnome-shell/extensions/unite@hardpixel.eu"
+
+# Importar as configurações (salvo no github)
+curl -JLk -o /tmp/unite-settings.conf "https://raw.githubusercontent.com/elppans/ubuntu2204-package-list/refs/heads/main/unite-extensions-settings.conf"
+dconf load /org/gnome/shell/extensions/unite/ < /tmp/unite-settings.conf
+
+# Ativar a extenção
+gnome-extensions enable "unite@hardpixel.eu"
+
+# ___
 
 # Atualização do sistema
 
