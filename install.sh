@@ -67,6 +67,10 @@ sudo apt -y install wine winetricks
 # Front-end FFmpeg GUI baseado em Qt5 e escrito em C++
 sudo apt -y install mystiq
 
+# Unetbootin, criação de pendrive bootável
+curl -JLk -o /tmp/unetbootin_github-install.sh https://raw.githubusercontent.com/elppans/customshell/refs/heads/master/unetbootin_github-install.sh
+bash /tmp/unetbootin_github-install.sh
+
 # Extensões para o Nautilus
 sudo apt -y install nautilus-admin nautilus-image-converter python3-nautilus
 
