@@ -306,4 +306,4 @@ sudo apt -y autoremove
 
 echo -e '\n\nConfigurações finalizadas, reiniciando o computador em alguns segundos...\n\n'
 sleep 5
-reboot
+sudo reboot
