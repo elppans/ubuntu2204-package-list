@@ -9,6 +9,7 @@ fi
 # ___ Configurações do sistema
 sudo echo
 echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplicamos as atualizações e ajustes necessários..."
+echo "Após as configurações, o computador será reiniciado!"
 
 # Atualiza a lista de pacotes em modo silencioso
 sudo apt update -qq
@@ -303,4 +304,6 @@ sudo apt clean
 sudo apt autoclean
 sudo apt -y autoremove
 
-echo -e '\n\nReinicie o computador para aplicar as configurações!\n\n'
+echo -e '\n\nConfigurações finalizadas, reiniciando o computador em alguns segundos...\n\n'
+sleep 5
+reboot
