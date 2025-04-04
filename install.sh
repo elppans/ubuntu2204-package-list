@@ -235,11 +235,16 @@ sudo flatpak install -y flathub com.rtosta.zapzap
 # ___ Instalação usando Scripts customizados
 
 # Action Script, conversão de imagens
-cd /tmp
-git clone https://github.com/elppans/el-images.git
-cd el-images
+git clone https://github.com/elppans/el-images.git /tmp/el-images
+cd /tmp/el-images
 ./install.sh
-cd -
+cd - || exit 1
+
+# Actions Scripts
+git clone https://github.com/elppans/factions-shell.git /tmp/factions-shell
+cd /tmp/factions-shell
+./install.sh
+cd - || exit 1
 
 # Bitvise (OPCIONAL). Free SSH file transfer, terminal e tunelamento
 # cd /tmp
