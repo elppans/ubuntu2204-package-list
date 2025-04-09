@@ -12,8 +12,10 @@ echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplic
 echo "Após as configurações, o computador será reiniciado!"
 
 # Adicionar repositório de terceiros
-curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
-echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
+curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
+echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
+curl -fSsL https://linux.teamviewer.com/pubkey/currentkey.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/teamview.gpg > /dev/null
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/teamview.gpg] http://linux.teamviewer.com/deb stable main" | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
 
 # Atualiza a lista de pacotes em modo silencioso
 sudo apt update -qq
@@ -109,10 +111,12 @@ PATH=/snap/bin:$PATH
 sudo chmod +x /usr/local/bin/stylelint
 
 # https://www.teamviewer.com/pt-br/download/linux/
-sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
-sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb
+# sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+# sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb
+sudo apt -y install teamviewer
 
 # Anydesk
+https://anydesk.com/pt/downloads/linux
 sudo apt -y install anydesk
 
 #
