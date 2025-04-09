@@ -11,6 +11,10 @@ sudo echo
 echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplicamos as atualizações e ajustes necessários..."
 echo "Após as configurações, o computador será reiniciado!"
 
+# Adicionar repositório de terceiros
+curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
+echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
+
 # Atualiza a lista de pacotes em modo silencioso
 sudo apt update -qq
 
@@ -62,6 +66,9 @@ sudo apt-file update
 # processador JSON de linha de comando, leve e flexível
 sudo apt -y install jq
 
+# formatador, analisador e interpretador de shell
+sudo apt -y install shfmt
+
 # Pacotes para aplicativos Windows
 sudo apt -y install wine winetricks
 
@@ -105,6 +112,10 @@ sudo chmod +x /usr/local/bin/stylelint
 sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb
 
+# Anydesk
+sudo apt -y install anydesk
+
+#
 # GNU privacy guard - serviço de gerenciamento de certificados de rede
 sudo apt -y install dirmngr
 sudo mkdir -m 700 -p /root/.gnupg
@@ -191,7 +202,7 @@ install_snap opera
 install_snap gtkhash
 install_snap node
 install_snap shellcheck
-install_snap shfmt
+# install_snap shfmt # Esta versão tem falha, a nativa está tudo OK
 install_snap prettier
 install_snap dbeaver-ce
 
@@ -228,7 +239,7 @@ fi
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub com.microsoft.Edge
 sudo flatpak install -y flathub org.kde.kate
-sudo flatpak install -y flathub com.anydesk.Anydesk
+# sudo flatpak install -y flathub com.anydesk.Anydesk # A versão nativa não trava
 sudo flatpak install -y flathub com.rustdesk.RustDesk
 sudo flatpak install -y flathub com.rtosta.zapzap
 
