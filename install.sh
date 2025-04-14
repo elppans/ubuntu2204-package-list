@@ -48,7 +48,8 @@ sleep 3
 sudo apt -y install flatpak
 
 # Flatpak support for GNOME Software
-sudo apt -y install gnome-software-plugin-flatpak
+# sudo apt -y install gnome-software-plugin-flatpak
+sudo apt -y remove gnome-software
 
 # Repositório do Flathub
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
