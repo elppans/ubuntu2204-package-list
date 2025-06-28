@@ -6,23 +6,28 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
+source /etc/lsb-release
+
 # ___ Configurações do sistema
 sudo echo
 echo "Configurações do sistema em andamento. Por favor, aguarde enquanto aplicamos as atualizações e ajustes necessários..."
 echo "Após as configurações, o computador será reiniciado!"
 
-# Adicionar repositório de terceiros
-curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
-echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
-curl -fSsL https://linux.teamviewer.com/pubkey/currentkey.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/teamview.gpg > /dev/null
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/teamview.gpg] http://linux.teamviewer.com/deb stable main" | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
-
 # Atualiza a lista de pacotes em modo silencioso
 sudo apt update -qq
 
-# Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
-dconf write /org/gnome/nautilus/preferences/show-create-link true
-dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
+# apt-transport-https: permite que o gerenciador de pacotes APT acesse repositórios via protocolo HTTPS. Sem ele, o APT só consegue usar HTTP, que não é seguro.
+# dirmngr: é um componente necessário para gerenciar e baixar certificados e chaves públicas (normalmente para repositórios APT que usam assinaturas GPG).
+# software-properties-common: fornece ferramentas como o add-apt-repository, que facilita adicionar repositórios PPA e outras fontes de software.
+# ca-certificates: contém certificados digitais de autoridades certificadoras confiáveis, o que permite conexões seguras com servidores HTTPS.
+
+sudo apt -y apt-transport-https ca-certificates software-properties-common
+
+# GNU privacy guard - serviço de gerenciamento de certificados de rede
+sudo apt -y install dirmngr
+sudo mkdir -m 700 -p /root/.gnupg
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
 
 # Configurar a opção "Notificar-me de uma nova versão do Ubuntu" como "Nunca"
 sudo sed -i 's/^Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades
@@ -33,6 +38,53 @@ sudo sed -i 's/^/#/' /var/lib/ubuntu-advantage/apt-esm/etc/apt/sources.list.d/*e
 
 # Comenta a linha que faz referência ao CD-ROM no arquivo de fontes de pacotes
 sudo sed -i.bak '/^deb cdrom:/s/^/#/' /etc/apt/sources.list
+
+# Adicionar repositório de terceiros
+
+# Anydesk
+curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
+echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list > /dev/null
+
+# Team Viewer
+curl -fSsL https://linux.teamviewer.com/pubkey/currentkey.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/teamview.gpg > /dev/null
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/teamview.gpg] http://linux.teamviewer.com/deb stable main" | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
+
+# Google Chrome
+curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/google-chrome.gpg
+echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+
+# Vivaldi
+curl -fSsL https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/vivaldi.gpg
+echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/vivaldi.gpg] https://repo.vivaldi.com/archive/deb/ stable main' | sudo tee /etc/apt/sources.list.d/vivaldi.list > /dev/null
+
+# Opera
+curl -fsSL https://deb.opera.com/archive.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/opera.gpg
+echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/opera.gpg] https://deb.opera.com/opera-stable/ stable non-free' | sudo tee /etc/apt/sources.list.d/opera.list > /dev/null
+
+# Microsoft Edge
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg
+echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge-dev.list
+
+# VSCode
+echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+
+# VSCodium
+curl -fSsL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/vscodium.gpg
+echo deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/vscodium.gpg] https://download.vscodium.com/debs vscodium main | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
+
+# DBeaver
+curl -fsSL https://dbeaver.io/debs/dbeaver.gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/dbeaver.gpg
+echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list > /dev/null
+
+# OpenFortiGUI App
+# https://hadler.me/linux/openfortigui/ https://apt.iteas.at/
+# sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 23CAE45582EB0928
+gpg -k && sudo -S gpg --no-default-keyring --keyring /usr/share/keyrings/iteas-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 23CAE45582EB0928
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/iteas-keyring.gpg] https://apt.iteas.at/iteas ""$DISTRIB_CODENAME"" main" | sudo tee /etc/apt/sources.list.d/iteas.list >> /dev/null
+
+# Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
+dconf write /org/gnome/nautilus/preferences/show-create-link true
+dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
 
 # Atualização da lista de repositórios
 sudo apt update
@@ -120,20 +172,41 @@ sudo apt -y install teamviewer
 https://anydesk.com/pt/downloads/linux
 sudo apt -y install anydesk
 
-#
-# GNU privacy guard - serviço de gerenciamento de certificados de rede
-sudo apt -y install dirmngr
-sudo mkdir -m 700 -p /root/.gnupg
-gpgconf --kill gpg-agent
-gpgconf --launch gpg-agent
+# Navegadores
+sudo apt -y install microsoft-edge-stable
+sudo apt -y install google-chrome-stable
+sudo apt -y install vivaldi-stable
+sudo apt -y install opera-stable
+
+# VSCode/VSCodium
+sleep 5
+clear
+echo "Instalação de editor de código-fonte."
+echo
+echo "Escolha uma opção para instalar:"
+echo "1 - Visual Studio Code"
+echo "2 - VSCodium"
+read -p "Digite o número da opção desejada (pressione ENTER para Nenhum): " opcao
+case $opcao in
+  1)
+    echo "Instalando Visual Studio Code..."
+    sudo apt -y install code && export VSCODE="1" || echo "VSCode não pôde ser instalado"
+    ;;
+  2)
+    echo "Instalando VSCodium..."
+    sudo apt -y install codium && export VSCODIUM="1" || echo "VSCodium não pôde ser instalado"
+    ;;
+  *)
+      echo "Não será instalado nenhuma das opções!"
+      echo "Prosseguindo com a instalação de aplicativos..."
+      sleep 5
+    ;;
+esac
+
+# DBeaver
+sudo apt -y install dbeaver-ce
 
 # OpenFortiGUI App
-# https://hadler.me/linux/openfortigui/ https://apt.iteas.at/
-source /etc/lsb-release
-# sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 23CAE45582EB0928
-gpg -k && sudo -S gpg --no-default-keyring --keyring /usr/share/keyrings/iteas-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 23CAE45582EB0928
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/iteas-keyring.gpg] https://apt.iteas.at/iteas ""$DISTRIB_CODENAME"" main" | sudo tee /etc/apt/sources.list.d/iteas.list >> /dev/null
-sudo apt -qq update
 sudo apt -y install openfortigui
 
 # Download Cisco Secure Client, Version 5.1.6.103
@@ -202,14 +275,14 @@ rm -f "/tmp/failed_snap_installations.txt"
 # done
 
 install_snap marktext
-install_snap vivaldi
-install_snap opera
+# install_snap vivaldi # Movido para instalação via apt
+# install_snap opera # Movido para instalação via apt
 install_snap gtkhash
 install_snap node
 install_snap shellcheck
 # install_snap shfmt # Esta versão tem falha, a nativa está tudo OK
 install_snap prettier
-install_snap dbeaver-ce
+# install_snap dbeaver-ce # Movido para instalação via apt
 
 # Editor de desenvolvimento
 # O Visual Studio Code (VSCode) é a versão oficial da Microsoft,
@@ -217,7 +290,7 @@ install_snap dbeaver-ce
 # Veja mais em: https://github.com/elppans/vscodeum
 
 # install_snap code && export VSCODE="1" # "Instalando VSCode..."
-install_snap codium && export VSCODIUM="1" # "Instalando VSCodium..."
+# install_snap codium && export VSCODIUM="1" # "Instalando VSCodium..." # Movido para a instalação via apt
 
 # Configuração do VSCode
 if [ "$VSCODE" -eq 1 ]; then
@@ -241,8 +314,8 @@ fi
 
 # ___ Instalação de pacotes via FLATPAK
 
-sudo flatpak install -y flathub com.google.Chrome
-sudo flatpak install -y flathub com.microsoft.Edge
+sudo flatpak install -y flathub com.google.Chrome # Movido para instalação via apt
+sudo flatpak install -y flathub com.microsoft.Edge # Movido para instalação via apt
 sudo flatpak install -y flathub org.kde.kate
 # sudo flatpak install -y flathub com.anydesk.Anydesk # A versão nativa não trava
 sudo flatpak install -y flathub com.rustdesk.RustDesk
