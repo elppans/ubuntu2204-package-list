@@ -75,6 +75,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 - opera (Navegador web)
 - com.google.Chrome (Navegador Chrome)
 - com.microsoft.Edge (Navegador Edge)
+- Java padrão (OpenJDK Runtime Environment - 11.0.27+)
 - dbeaver-ce (Cliente de banco de dados)
 - code (Editor de desenvolvimento - Microsoft VSCode)
 - codium (Editor de desenvolvimento - VSCodium)
