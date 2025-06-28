@@ -227,6 +227,9 @@ esac
 # DBeaver
 sudo apt -y install dbeaver-ce
 
+# Java padrão
+sudo apt -y install default-jdk
+
 # OpenFortiGUI App
 sudo apt -y install openfortigui
 
