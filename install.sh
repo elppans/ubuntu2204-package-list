@@ -166,7 +166,7 @@ sudo chmod +x /usr/local/bin/stylelint
 # https://www.teamviewer.com/pt-br/download/linux/
 # sudo curl -JLk -o /var/cache/apt/archives/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 # sudo apt -y install /var/cache/apt/archives/teamviewer_amd64.deb
-sudo apt -y install teamviewer
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y teamviewer -o Dpkg::Options::="--force-confold"
 
 # Anydesk
 https://anydesk.com/pt/downloads/linux
