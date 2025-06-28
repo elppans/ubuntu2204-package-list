@@ -71,34 +71,36 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 - stylelint (Poderoso e moderno linter CSS)
 - teamviewer_amd64 (Software de acesso remoto Team Viewer)
 - cisco-secure-client-vpn (Módulo AnyConnect VPN para o Cisco Secure Client)
+- vivaldi (Navegador web)
+- opera (Navegador web)
+- com.google.Chrome (Navegador Chrome)
+- com.microsoft.Edge (Navegador Edge)
+- dbeaver-ce (Cliente de banco de dados)
+- code (Editor de desenvolvimento - Microsoft VSCode)
+- codium (Editor de desenvolvimento - VSCodium)
+- shfmt (Formatador de scripts Shell)
+- com.anydesk.Anydesk (Software de acesso remoto AnyDesk)
+- com.rustdesk.RustDesk (Software de acesso remoto RustDesk)
 
 #### Instalação via SNAP
 - marktext (Editor de texto Markdown)
-- vivaldi (Navegador web)
-- opera (Navegador web)
 - gtkhash (Ferramenta de hash)  
 - node (executável runtime)  
 - shellcheck (Ferramenta de análise de scripts Shell)
-- shfmt (Formatador de scripts Shell)
 - prettier (Formatador de código)
-- dbeaver-ce (Cliente de banco de dados)
-- codium (Editor de desenvolvimento - VSCodium)
 
 #### Instalação via FLATPAK
-- com.google.Chrome (Navegador Chrome)
-- com.microsoft.Edge (Navegador Edge)
+
 - org.kde.kate (Editor de texto Kate)
-- com.anydesk.Anydesk (Software de acesso remoto AnyDesk)
-- com.rustdesk.RustDesk (Software de acesso remoto RustDesk)
 - com.rtosta.zapzap (Cliente de WhatsApp)
 
 #### Instalação via Scripts Customizados
 - Action Script (Conversão de imagens)
 - Modelos de arquivos
-- Bitvise {Aplicativo Wine}-(Transferência de arquivos, terminal e tunelamento).  
+- Bitvise {Aplicativo Wine}-(Transferência de arquivos, terminal e tunelamento).  (**Desabilitado**)
 Descomente as linhas se quiser instalar 
 - Makedeb (Compilador de codigo fonte baseado no makepkg (Archlinux) - AVANÇADO).  
-Descomente as linhas se quiser instalar 
+
 
 ## 🚨 Aviso Legal  
 
