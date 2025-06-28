@@ -172,6 +172,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y teamviewer -o Dpkg::Optio
 https://anydesk.com/pt/downloads/linux
 sudo apt -y install anydesk
 
+# Rustdesk
+sudo apt -y install rustdesk
+
 # Navegadores
 sudo apt -y install microsoft-edge-stable
 sudo apt -y install google-chrome-stable
@@ -316,11 +319,11 @@ fi
 
 # ___ Instalação de pacotes via FLATPAK
 
-sudo flatpak install -y flathub com.google.Chrome # Movido para instalação via apt
-sudo flatpak install -y flathub com.microsoft.Edge # Movido para instalação via apt
+# sudo flatpak install -y flathub com.google.Chrome # Movido para instalação via apt
+# sudo flatpak install -y flathub com.microsoft.Edge # Movido para instalação via apt
 sudo flatpak install -y flathub org.kde.kate
 # sudo flatpak install -y flathub com.anydesk.Anydesk # A versão nativa não trava
-sudo flatpak install -y flathub com.rustdesk.RustDesk
+# sudo flatpak install -y flathub com.rustdesk.RustDesk # Movido para instalação via apt
 sudo flatpak install -y flathub com.rtosta.zapzap
 
 # ___ Instalação usando Scripts customizados
