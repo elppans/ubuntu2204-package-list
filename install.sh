@@ -176,7 +176,9 @@ sudo apt -y install anydesk
 sudo apt -y install microsoft-edge-stable
 sudo apt -y install google-chrome-stable
 sudo apt -y install vivaldi-stable
-sudo apt -y install opera-stable
+
+echo "opera-stable opera-stable/add-debian-repo boolean true" | sudo debconf-set-selections
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y opera-stable
 
 # VSCode/VSCodium
 sleep 5
