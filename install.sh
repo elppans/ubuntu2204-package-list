@@ -82,9 +82,21 @@ echo "deb [arch=amd64] https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt
 gpg -k && sudo -S gpg --no-default-keyring --keyring /usr/share/keyrings/iteas-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 23CAE45582EB0928
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/iteas-keyring.gpg] https://apt.iteas.at/iteas ""$DISTRIB_CODENAME"" main" | sudo tee /etc/apt/sources.list.d/iteas.list >> /dev/null
 
+# Ajustes de configurações via dconf
+
+# Configurações do Nautilus
 # Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
 dconf write /org/gnome/nautilus/preferences/show-create-link true
-dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
+# dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
+
+# Ajustes de configurações via gsettings
+
+# Configurações gerais do Gnome
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface clock-show-seconds true
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+gsettings set org.gnome.shell.weather automatic-location true
 
 # Atualização da lista de repositórios
 sudo apt update
@@ -110,6 +122,9 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 # Remoção de jogos inúteis
 sudo apt -y remove gnome-sudoku gnome-mahjongg gnome-mines aisleriot
+
+# Editor DConf
+sudo apt -y install dconf-editor
 
 # Servidor SSH (Opcional)
 sudo apt -y install openssh-server
