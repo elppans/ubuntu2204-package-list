@@ -185,7 +185,8 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y opera-stable
 
 # VSCode/VSCodium
 sleep 5
-clear
+# clear
+echo
 echo "Instalação de editor de código-fonte."
 echo
 echo "Escolha uma opção para instalar:"
