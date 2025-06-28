@@ -58,7 +58,7 @@ curl -fSsL https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --d
 echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/vivaldi.gpg] https://repo.vivaldi.com/archive/deb/ stable main' | sudo tee /etc/apt/sources.list.d/vivaldi.list > /dev/null
 
 # Opera
-curl -fsSL https://deb.opera.com/archive.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/opera.gpg
+curl -fsSL https://deb.opera.com/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/opera.gpg
 echo -e 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/opera.gpg] https://deb.opera.com/opera-stable/ stable non-free' | sudo tee /etc/apt/sources.list.d/opera.list > /dev/null
 
 # Microsoft Edge
