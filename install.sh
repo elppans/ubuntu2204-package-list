@@ -21,7 +21,7 @@ sudo apt update -qq
 # software-properties-common: fornece ferramentas como o add-apt-repository, que facilita adicionar repositórios PPA e outras fontes de software.
 # ca-certificates: contém certificados digitais de autoridades certificadoras confiáveis, o que permite conexões seguras com servidores HTTPS.
 
-sudo apt -y install curl apt-transport-https ca-certificates software-properties-common
+sudo apt -y install curl apt-transport-https ca-certificates software-properties-common 
 
 # GNU privacy guard - serviço de gerenciamento de certificados de rede
 sudo apt -y install dirmngr
