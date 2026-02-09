@@ -169,6 +169,21 @@ cp -rf /usr/share/applications/actions-for-nautilus-configurator.desktop "$HOME"
 echo "NoDisplay=true" >> ~/.local/share/applications/actions-for-nautilus-configurator.desktop
 nautilus -q
 
+# Ajustes de configurações via dconf
+
+# Configurações do Nautilus
+# Ativa a opção para mostrar a criação de links e exclusão permanente no Nautilus
+dconf write /org/gnome/nautilus/preferences/show-create-link true
+# dconf write /org/gnome/nautilus/preferences/show-delete-permanently true
+
+# Ajustes de configurações via gsettings
+
+# Configurações gerais do Gnome
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface clock-show-seconds true
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+gsettings set org.gnome.shell.weather automatic-location true
 
 # [ETAPA 6] - Finalização do Sistema
 # ------------------------------------------------------------------------------
