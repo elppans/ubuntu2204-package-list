@@ -132,7 +132,7 @@ mkdir -p "$HOME/.config/Code/User"
 #xargs -L 1 code --install-extension < "$HOME/.config/Code/User/extensions_list.txt"
 
 # Gerenciador de banco de dados
-sudo apt -y install dbeaver
+sudo apt -y install dbeaver-ce
 
 # Editor de texto kate
 sudo apt -y install kate
