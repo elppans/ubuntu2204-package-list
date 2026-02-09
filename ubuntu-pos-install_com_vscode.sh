@@ -131,6 +131,9 @@ mkdir -p "$HOME/.config/Code/User"
 # Instala extensões listadas no backup
 #xargs -L 1 code --install-extension < "$HOME/.config/Code/User/extensions_list.txt"
 
+# Gerenciador de banco de dados
+sudo apt -y install dbeaver
+
 # Editor de texto kate
 sudo apt -y install kate
 
