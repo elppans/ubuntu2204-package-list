@@ -109,6 +109,8 @@ mkdir -p "$HOME/.config/Code/User"
 # Instala extensões listadas no backup
 #xargs -L 1 code --install-extension < "$HOME/.config/Code/User/extensions_list.txt"
 
+# Editor de texto kate
+sudo apt -y install kate
 
 # [ETAPA 4] - Flatpak e Snap
 # ------------------------------------------------------------------------------
@@ -122,7 +124,7 @@ sudo flatpak install -y flathub com.rtosta.zapzap
 # Snap (Apps clássicos e editores)
 sudo snap install marktext
 sudo snap install prettier --beta
-sudo snap install kate --classic
+# sudo snap install kate --classic
 
 
 # [ETAPA 5] - Customizações (Templates e Nautilus Actions)
