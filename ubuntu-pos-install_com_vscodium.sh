@@ -134,6 +134,9 @@ xargs -L 1 codium --install-extension < "$HOME/.config/VSCodium/User/extensions_
 # Gerenciador de banco de dados
 sudo apt -y install dbeaver-ce 
 
+# VPN openFortiGUI
+sudo apt -y install openfortigui
+
 # Editor de texto kate
 sudo apt -y install kate
 
