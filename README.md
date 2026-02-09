@@ -10,7 +10,7 @@ Eu **não me responsabilizo** por quaisquer problemas ou danos que possam ocorre
 
 1. **Clone o repositório**  
    ```bash
-   git clone https://github.com/elppans/ubuntu2204-package-list.git
+   git clone --branch {repo} https://github.com/elppans/ubuntu2204-package-list.git
    ```
    ```bash
    cd ubuntu2204-package-list
