@@ -138,8 +138,10 @@ cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
 # Actions for Nautilus (Menu de contexto personalizado)
 cd /tmp && git clone https://github.com/elppans/actions-for-nautilus.git
 cd actions-for-nautilus && sudo make install_global
-mkdir -p "$HOME"/.local/share/actions-for-nautilus
+mkdir -p "$HOME"/.local/share/actions-for-nautilus "$HOME"/.local/share/applications
 cp -rf /usr/share/actions-for-nautilus-configurator/sample-config.json "$HOME"/.local/share/actions-for-nautilus/config.json
+cp -rf /usr/share/applications/actions-for-nautilus-configurator.desktop "$HOME"/.local/share/applications
+echo "NoDisplay=true" >> ~/.local/share/applications/actions-for-nautilus-configurator.desktop
 nautilus -q
 
 
