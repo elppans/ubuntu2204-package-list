@@ -200,6 +200,7 @@ sudo snap refresh
 sudo apt -y autoremove
 sudo apt clean
 
-echo -e '\n\nConcluído! O sistema será reiniciado em 5 segundos...\n'
-sleep 5
+echo -e '\n\n'
+for i in `seq 5 -1 1` ; do echo -ne "Concluído! O sistema será reiniciado em $i Segundos.\r" ; sleep 1 ; done
+echo
 sudo reboot
