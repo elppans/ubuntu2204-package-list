@@ -1,33 +1,21 @@
-# Ubuntu 22.04 Package List
+# Scripts de Instalação
 
-This repository contains installation scripts for Ubuntu 22.04.
-
-## Scripts
-
-### ubuntu-pos-install_com_vscode.sh
-
-This script installs Visual Studio Code on Ubuntu 22.04. It is designed to set up the environment quickly with all necessary dependencies and extensions.
-
-### ubuntu-pos-install_com_vscodium.sh
-
-This script installs VSCodium on Ubuntu 22.04, providing a fully open-source version of Visual Studio Code without telemetry.
-
-## Usage
-
-To use these scripts, execute them in your terminal:
+## ubuntu-pos-install_com_vscode.sh
+Este é um script para instalar o Visual Studio Code no Ubuntu. Para usar este script, execute o seguinte comando no terminal:
 
 ```bash
 bash ubuntu-pos-install_com_vscode.sh
 ```
 
-or
+### Advertências
+- Certifique-se de que você tenha permissões adequadas antes de executar o script.
+
+## ubuntu-pos-install_com_vscodium.sh
+Este é um script para instalar o VSCodium, uma versão de código aberto do Visual Studio Code. Para usá-lo, execute:
 
 ```bash
 bash ubuntu-pos-install_com_vscodium.sh
 ```
 
-Make sure to run with sudo if required.
-
-## Conclusion
-
-Feel free to contribute with new scripts or improvements!
+### Advertências
+- Tal como com o script do VS Code, garanta que você tenha as permissões necessárias e revise o código do script antes de executá-lo.
