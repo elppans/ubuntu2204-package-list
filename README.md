@@ -1,22 +1,18 @@
-## Como usar
+# Ubuntu 22.04 Package List
 
-To use the specialized installation scripts, refer to the following steps:
+This repository contains a list of packages and scripts for Ubuntu 22.04 LTS.
 
-1. For Visual Studio Code installation, run:
-   ```bash
-   ./ubuntu-pos-install_com_vscode.sh
-   ```
+## Scripts
 
-2. For VSCodium installation, run:
-   ```bash
-   ./ubuntu-pos-install_com_vscodium.sh
-   ```
+The following scripts are available in this repository:
 
-## Instalação via Scripts Customizados
+- **ubuntu-pos-install.sh**: The main installation script for Ubuntu 22.04.
+- **ubuntu-pos-install_com_vscode.sh**: Script to install Visual Studio Code on Ubuntu 22.04.
+  - This script will add the Microsoft GPG key, set up the repository, and install the Visual Studio Code package.
 
-The installation has been restructured into two specialized scripts to cater to different preferences:
+- **ubuntu-pos-install_com_vscodium.sh**: Script to install VSCodium on Ubuntu 22.04.
+  - Similar to the VS Code script, this script will add the necessary GPG key and repository for VSCodium, along with installing the package.
 
-- **ubuntu-pos-install_com_vscode.sh**: This script installs Visual Studio Code. It is tailored for users who prefer the official Microsoft version.
-- **ubuntu-pos-install_com_vscodium.sh**: This script installs VSCodium. It is targeted at users who prefer an open-source version of the editor, free from Microsoft branding.
+## Usage
 
-Make sure to run these scripts in your terminal and follow any on-screen instructions to complete the installation process.
+To execute any of these scripts, you will need to have appropriate permissions. You can run the script using the command: `bash script_name.sh`. Make sure to replace `script_name.sh` with the desired script's name.
