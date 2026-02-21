@@ -132,13 +132,13 @@ tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
 xargs -L 1 codium --install-extension < "$HOME/.config/VSCodium/User/extensions_list.txt"
 
 # Gerenciador de banco de dados
-sudo apt -y install dbeaver-ce 
+# sudo apt -y install dbeaver-ce # Movido para sessão Flatpak
 
 # VPN openFortiGUI
 sudo apt -y install openfortigui
 
 # Editor de texto kate
-sudo apt -y install kate
+# sudo apt -y install kate # Movido para sessão Flatpak
 
 # [ETAPA 4] - Flatpak e Snap
 # ------------------------------------------------------------------------------
@@ -148,9 +148,12 @@ echo "Configurando Flatpak e Snap..."
 sudo apt -y install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.rtosta.zapzap
+sudo flatpak install -y flathub com.github.marktext.marktext
+sudo flatpak install -y flathub org.kde.kate
+sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
 
 # Snap (Apps clássicos e editores)
-sudo snap install marktext
+# sudo snap install marktext # Movido para sessão Flatpak
 sudo snap install prettier --beta
 # sudo snap install kate --classic
 
@@ -187,6 +190,19 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.shell.weather automatic-location true
+
+# Ajustes de configurações de terceiros
+
+# Desativando aviso de update do DBeaver, apt/snap/flatpak
+mkdir -p "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+mkdir -p "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+mkdir -p "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
 
 # [ETAPA 6] - Finalização do Sistema
 # ------------------------------------------------------------------------------
