@@ -114,14 +114,21 @@ sudo apt -y install git make jq shfmt shellcheck curl openssh-server sshpass
 # Linguagens e Runtimes (NodeJS, Java)
 sudo apt -y install nodejs default-jdk
 
+# Dependências para outros pacotes
+sudo apt -y install mtools freerdp2-x11
+
+# Compactadores
+sudo apt -y install p7zip-full p7zip-rar rar unrar
+
 # Navegadores e Ferramentas de Acesso Remoto
 sudo apt -y install chromium-browser anydesk rustdesk
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y teamviewer -o Dpkg::Options::="--force-confold"
 
 # Utilitários de Interface e Nautilus
 # - dconf-editor: Configurações avançadas de GNOME
+# - meld: ferramenta gr�fica para diff e merge de arquivos
 # - nautilus-admin: Abrir pastas como root pelo gerenciador de arquivos
-sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3-nautilus gtkhash
+sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3-nautilus gtkhash meld
 
 # Instalação VSCode e restauração de backup de extensões
 sudo apt -y install code
@@ -132,13 +139,13 @@ mkdir -p "$HOME/.config/Code/User"
 #xargs -L 1 code --install-extension < "$HOME/.config/Code/User/extensions_list.txt"
 
 # Gerenciador de banco de dados
-sudo apt -y install dbeaver-ce
+# sudo apt -y install dbeaver-ce # Movido para sessão Flatpak
 
 # VPN openFortiGUI
 sudo apt -y install openfortigui
 
 # Editor de texto kate
-sudo apt -y install kate
+# sudo apt -y install kate # Movido para sessão Flatpak
 
 # [ETAPA 4] - Flatpak e Snap
 # ------------------------------------------------------------------------------
@@ -148,9 +155,26 @@ echo "Configurando Flatpak e Snap..."
 sudo apt -y install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.rtosta.zapzap
+sudo flatpak install -y flathub com.github.marktext.marktext
+sudo flatpak install -y flathub org.kde.kate
+sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
+
+# --- INSTALAÇÃO DO WINE VIA FLATPAK ---
+
+# RECOMENDADO: Versão 11.0 com tecnologia WOW64. 
+# Permite rodar apps de 32 bits em sistema 64 bits sem instalar bibliotecas i386 extras no Ubuntu.
+sudo flatpak install flathub org.winehq.Wine//wow64-25.08 -y
+
+# ALTERNATIVO: Versão 11.0 Estável Tradicional. 
+# Exige que o sistema tenha bibliotecas de 32 bits instaladas para rodar programas Windows de 32 bits.
+# flatpak install flathub org.winehq.Wine//stable-25.08 -y
+
+echo -e '#!/bin/bash\n/usr/bin/flatpak run org.winehq.Wine $@\n' | sudo tee /usr/local/bin/wine
+echo -e '#!/bin/bash\n/usr/bin/flatpak run --command=winetricks org.winehq.Wine $@\n' | sudo tee /usr/local/bin/winetricks
+sudo chmod +x /usr/local/bin/wine /usr/local/bin/winetricks
 
 # Snap (Apps clássicos e editores)
-sudo snap install marktext
+# sudo snap install marktext # Movido para sessão Flatpak
 sudo snap install prettier --beta
 # sudo snap install kate --classic
 
@@ -162,6 +186,11 @@ echo "Aplicando customizações de usuário..."
 # Modelos de arquivos (Templates para o menu 'Novo Documento')
 git clone https://github.com/elppans/ubuntu_file_templates.git /tmp/ubuntu_file_templates
 cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
+
+# Action Scripts para conversão de imagens
+git clone https://github.com/elppans/el-images.git /tmp/imagens
+cd /tmp/imagens
+./install.sh
 
 # Actions for Nautilus (Menu de contexto personalizado)
 cd /tmp && git clone https://github.com/elppans/actions-for-nautilus.git
@@ -187,6 +216,19 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.shell.weather automatic-location true
+
+# Ajustes de configurações de terceiros
+
+# Desativando aviso de update do DBeaver, apt/snap/flatpak
+mkdir -p "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+mkdir -p "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+mkdir -p "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+# sed -i 's/ui.auto.update.check=true/ui.auto.update.check=false/g' "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/.var/app/io.dbeaver.DBeaverCommunity/data/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
+echo "ui.auto.update.check=false" | tee -a "$HOME"/snap/dbeaver-ce/current/.local/share/DBeaverData/workspace6/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jkiss.dbeaver.core.prefs
 
 # [ETAPA 6] - Finalização do Sistema
 # ------------------------------------------------------------------------------
