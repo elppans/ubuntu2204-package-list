@@ -187,6 +187,11 @@ echo "Aplicando customizações de usuário..."
 git clone https://github.com/elppans/ubuntu_file_templates.git /tmp/ubuntu_file_templates
 cp -a /tmp/ubuntu_file_templates/* "$(xdg-user-dir TEMPLATES)"
 
+# Action Scripts para conversão de imagens
+git clone https://github.com/elppans/el-images.git /tmp/imagens
+cd /tmp/imagens
+./install.sh
+
 # Actions for Nautilus (Menu de contexto personalizado)
 cd /tmp && git clone https://github.com/elppans/actions-for-nautilus.git
 cd actions-for-nautilus && sudo make install_global
