@@ -114,6 +114,12 @@ sudo apt -y install git make jq shfmt shellcheck curl openssh-server sshpass
 # Linguagens e Runtimes (NodeJS, Java)
 sudo apt -y install nodejs default-jdk
 
+# Dependências para outros pacotes
+sudo apt -y install mtools freerdp2-x11
+
+# Compactadores
+sudo apt -y install p7zip-full p7zip-rar rar unrar
+
 # Navegadores e Ferramentas de Acesso Remoto
 sudo apt -y install chromium-browser anydesk rustdesk
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y teamviewer -o Dpkg::Options::="--force-confold"
@@ -151,6 +157,20 @@ sudo flatpak install -y flathub com.rtosta.zapzap
 sudo flatpak install -y flathub com.github.marktext.marktext
 sudo flatpak install -y flathub org.kde.kate
 sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
+
+# --- INSTALAÇÃO DO WINE VIA FLATPAK ---
+
+# RECOMENDADO: Versão 11.0 com tecnologia WOW64. 
+# Permite rodar apps de 32 bits em sistema 64 bits sem instalar bibliotecas i386 extras no Ubuntu.
+sudo flatpak install flathub org.winehq.Wine//wow64-25.08 -y
+
+# ALTERNATIVO: Versão 11.0 Estável Tradicional. 
+# Exige que o sistema tenha bibliotecas de 32 bits instaladas para rodar programas Windows de 32 bits.
+# flatpak install flathub org.winehq.Wine//stable-25.08 -y
+
+echo -e '#!/bin/bash\n/usr/bin/flatpak run org.winehq.Wine $@\n' | sudo tee /usr/local/bin/wine
+echo -e '#!/bin/bash\n/usr/bin/flatpak run --command=winetricks org.winehq.Wine $@\n' | sudo tee /usr/local/bin/winetricks
+sudo chmod +x /usr/local/bin/wine /usr/local/bin/winetricks
 
 # Snap (Apps clássicos e editores)
 # sudo snap install marktext # Movido para sessão Flatpak
