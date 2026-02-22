@@ -126,8 +126,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y teamviewer -o Dpkg::Optio
 
 # Utilitários de Interface e Nautilus
 # - dconf-editor: Configurações avançadas de GNOME
+# - meld: ferramenta gr�fica para diff e merge de arquivos
 # - nautilus-admin: Abrir pastas como root pelo gerenciador de arquivos
-sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3-nautilus gtkhash
+sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3-nautilus gtkhash meld
 
 # Instalação VSCodium e restauração de backup de extensões
 sudo apt -y install codium
