@@ -1,0 +1,52 @@
+# Ubuntu 22.04, Interface de administração via Web
+
+# Cockpit, Interface de administração baseada na web para sistemas Unix
+# Acesso: 127.0.0.1:9090
+# Interessante: Configuração de rede (Mais fácil), Postman, VM (Básico)
+sudo apt install cockpit cockpit-doc cockpit-pcp cockpit-sosreport sssd-dbus
+sudo apt install cockpit-machines # OPCIONAL (Ocupa +161 MB)
+sudo apt install cockpit-podman # OPCIONAL (Ocupa +110 MB)
+
+# [Webmin](https://webmin.com/), Interface de administração baseada na web para sistemas Unix
+# Acesso: 127.0.0.1:10000, https://192.168.122.182:10000
+# Interessante: Cron básico mas fácil, Configuração de rede (Complexo até se acostumar), Partições, LVM, RAID, Gerenciamento de pacotes
+curl -fsSL https://download.webmin.com/jcameron-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/webmin.gpg
+echo "deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib" | sudo tee /etc/apt/sources.list.d/webmin.list
+sudo apt update && sudo apt -y install webmin --install-recommends
+
+
+# [aaPanel](https://www.aapanel.org)
+# Recomendado para Servidores Web
+# Acesso: Ao final da instalação, é fornecido os endereços, usuário e senha 
+# aaPanel Internet Address: https://200.162.210.143:33897/3afc0db1
+# aaPanel Internal Address: https://192.168.122.182:33897/3afc0db1
+# username: 5eltqqyu
+# password: 2df5d60f
+# Serviço: btpanel.service
+# Interessante: WorldPress, FTP, Banco, Docker. Cron bom de configuração
+# Ps.: Este App bloqueia a conexão dos outros
+# Uso completo é pago
+wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh aapanel
+
+# [cyberpanel](https://github.com/usmannasir/cyberpanel)
+# Recomendado para Servidores Web
+# Acesso: 
+# https://200.162.210.143:8090 admin:ct3nC7qeSrDCXTmV
+# https://192.168.122.182:8090
+# TCP: 8090 for CyberPanel
+# TCP: 80, TCP: 443 and UDP: 443 for webserver
+# TCP: 21 and TCP: 40110-40210 for FTP
+# TCP: 25, TCP: 587, TCP: 465, TCP: 110, TCP: 143 and TCP: 993 for mail service
+# TCP: 53 and UDP: 53 for DNS service
+sudo su - -c "sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh)"
+# 1. Install CyberPanel with OpenLiteSpeed. = GRÁTIS
+# 2. Install Cyberpanel with LiteSpeed Enterprise. = PAGO
+# Full service for CyberPanel, include PowerDNS, Postfix and Pure-FTPd
+# If you want to kill the watchdog , run watchdog kill
+# Instala MariaDB por padrão. Responder "N" para instalação local
+# Interessante: Website (Pra quem manja é foda), Banco (MariaDB), phpMyAdmin, Docker Apps (pago), Docker Manager (Ok), DNS Server, CloudFlare DNS, FTP 
+# Deve "Criar Website" para usar os Apps
+
+
+
+
