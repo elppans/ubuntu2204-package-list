@@ -132,11 +132,13 @@ sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3
 
 # Instalação VSCode e restauração de backup de extensões
 sudo apt -y install code
-mkdir -p "$HOME/.config/Code/User"
+# mkdir -p "$HOME/.config/Code/User"
 #curl -JLk -o /tmp/vscode_backup.tar.gz "https://github.com/elppans/vscodeum/raw/refs/heads/main/vscode_backup/vscode_backup_20250226_170128.tar.gz"
 #tar -xzf /tmp/vscode_backup.tar.gz -C "$HOME"/.config/Code/User/
 # Instala extensões listadas no backup
 #xargs -L 1 code --install-extension < "$HOME/.config/Code/User/extensions_list.txt"
+curl -JLk -o /usr/local/bin/vscodeum-extensions "https://raw.githubusercontent.com/elppans/vscodeum/refs/heads/main/usr/local/bin/vscodeum-extensions"
+sudo chmod +x /usr/local/bin/vscodeum-extensions
 
 # Gerenciador de banco de dados
 # sudo apt -y install dbeaver-ce # Movido para sessão Flatpak

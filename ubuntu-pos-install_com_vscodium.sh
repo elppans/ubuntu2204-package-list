@@ -132,11 +132,15 @@ sudo apt -y install dconf-editor nautilus-admin nautilus-image-converter python3
 
 # Instalação VSCodium e restauração de backup de extensões
 sudo apt -y install codium
-mkdir -p "$HOME/.config/VSCodium/User"
-curl -JLk -o /tmp/vscodium_backup.tar.gz "https://github.com/elppans/vscodeum/raw/refs/heads/main/vscodium_backup/vscodium_backup_20250226_170128.tar.gz"
-tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
+# mkdir -p "$HOME/.config/VSCodium/User"
+# curl -JLk -o /tmp/vscodium_backup.tar.gz "https://github.com/elppans/vscodeum/raw/refs/heads/main/vscodium_backup/vscodium_backup_20250226_170128.tar.gz"
+# tar -xzf /tmp/vscodium_backup.tar.gz -C "$HOME"/.config/VSCodium/User/
 # Instala extensões listadas no backup
-xargs -L 1 codium --install-extension < "$HOME/.config/VSCodium/User/extensions_list.txt"
+# xargs -L 1 codium --install-extension < "$HOME/.config/VSCodium/User/extensions_list.txt"
+curl -JLk -o /tmp/vscodium_extensions.txt "https://raw.githubusercontent.com/elppans/vscodeum-ext/refs/heads/main/vscodium_extensions.txt"
+curl -JLk -o /usr/local/bin/vscodeum-extensions "https://raw.githubusercontent.com/elppans/vscodeum/refs/heads/main/usr/local/bin/vscodeum-extensions"
+sudo chmod +x /usr/local/bin/vscodeum-extensions
+/usr/local/bin/vscodeum-extensions import /tmp/vscodium_extensions.txt
 
 # Gerenciador de banco de dados
 # sudo apt -y install dbeaver-ce # Movido para sessão Flatpak
