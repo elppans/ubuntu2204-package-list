@@ -50,6 +50,8 @@ gpgconf --launch gpg-agent
 sudo sed -i 's/^Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades
 sudo sed -i.bak '/^deb cdrom:/s/^/#/' /etc/apt/sources.list
 
+# Silenciar os avisos do Python no APT
+echo 'PythonWarnings "ignore"' | sudo tee /etc/apt/apt.conf.d/99silence-python-warnings
 
 # [ETAPA 2] - Adicionando Repositórios Externos (Chaves GPG e Listas)
 # ------------------------------------------------------------------------------
@@ -250,6 +252,6 @@ sudo apt -y autoremove
 sudo apt clean
 
 echo -e '\n\n'
-for i in `seq 5 -1 1` ; do echo -ne "Concluído! O sistema será reiniciado em $i Segundos.\r" ; sleep 1 ; done
+for i in $(seq 5 -1 1) ; do echo -ne "Concluído! O sistema será reiniciado em $i Segundos.\r" ; sleep 1 ; done
 echo
 sudo reboot
