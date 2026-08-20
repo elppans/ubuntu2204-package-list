@@ -15,7 +15,7 @@ sudo apt install --reinstall ubuntu-desktop gdm3 -y
 sudo dpkg-reconfigure gdm3
 sudo systemctl set-default graphical.target
 sudo apt install -f
-sudo systemctl start gdm3
+# sudo systemctl start gdm3
 sudo apt upgrade -y
 sudo apt clean
 sudo apt autoclean
